@@ -12,6 +12,7 @@ import {mockChatPersistence} from "./cores/persistence/mock-chat-persistence.js"
 import {memoryFlexStorage} from "../../../toolbox/flex-storage/memory-flex-storage.js"
 import {assimilateCrypto} from "../../../assembly/backend/assimilators/assimilate-crypto.js"
 import {configureTokenFunctions} from "../../../assembly/backend/configurators/configure-token-functions.js"
+import {mongoChatPersistence} from "./cores/persistence/chat-persistence-mongo.js"
 
 void async function main() {
 	const {onDeath} = deathWithDignity()
@@ -27,7 +28,7 @@ void async function main() {
 		configureTokenFunctions,
 	})
 
-	const persistence = await mockChatPersistence(storage)
+	const persistence = await mongoChatPersistence()
 
 	const core = makeChatServerCore({
 		rando,
