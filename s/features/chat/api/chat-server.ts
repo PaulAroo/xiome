@@ -20,8 +20,6 @@ import {mongoChatPersistence} from "./cores/persistence/chat-persistence-mongo.j
 void async function main() {
 	const {onDeath} = deathWithDignity()
 
-	console.log("starting chat server...")
-
 	const config = json5.parse<SecretConfig>(process.env.XIOME_CONFIG)
 	const rando = await getRando()
 	const storage = memoryFlexStorage()
@@ -53,12 +51,14 @@ void async function main() {
 		policy: authPolicies.anonPolicy,
 	})
 
+	const port = config?.chat?.port ?? 8000
 	const server = webSocketServer({
-		port: config?.chat?.port ?? 8000,
+		port,
 		exposeErrors: true,
 		maxPayloadSize: renraku.megabytes(1),
-		acceptConnection({controls, prepareClientApi}) {
+		acceptConnection({controls, headers, prepareClientApi}) {
 			const {api, disconnect} = core.acceptNewClient({
+				headers,
 				controls,
 				clientside: prepareClientApi<ReturnType<typeof makeChatClientside>>({
 					chatClient: async() => {},
@@ -72,5 +72,6 @@ void async function main() {
 		},
 	})
 
+	console.log(`🚀 chat server listening on port ${port}`)
 	onDeath(() => server.close())
 }()

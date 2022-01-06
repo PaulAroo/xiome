@@ -34,6 +34,7 @@
 		"server": "XIOME_CONFIG=`cat dev-config.json` bash -c 'node x/server.js'",
 		"server-debug": "XIOME_CONFIG=`cat dev-config.json` bash -c 'node --inspect-brk x/server.js'",
 		"chat-server": "XIOME_CONFIG=`cat dev-config.json` bash -c 'node x/features/chat/api/chat-server.js'",
+		"chat-server-debug": "XIOME_CONFIG=`cat dev-config.json` bash -c 'node --inspect-brk x/features/chat/api/chat-server.js'",
 		"start": "run-p start-platform start-mocksite",
 		"start-platform": "http-server -p 5000",
 		"start-mocksite": "http-server -p 5001",
@@ -76,7 +77,7 @@
 		"mongodb": "^4.2.2",
 		"pug": "^3.0.2",
 		"redcrypto": "0.0.0-dev.9",
-		"renraku": "0.0.0-dev.51",
+		"renraku": "0.0.0-dev.52",
 		"stripe": "^8.195.0",
 		"typed-rest-client": "^1.8.6",
 		"ws": "^8.3.0"

@@ -106,7 +106,8 @@ export function makeChatServerCore({
 		)
 	})
 
-	function acceptNewClient({controls, clientside, handleDisconnect}: {
+	function acceptNewClient({headers, controls, clientside, handleDisconnect}: {
+			headers: renraku.HttpHeaders
 			controls: renraku.ConnectionControls
 			clientside: renraku.Remote<ReturnType<typeof makeChatClientside>>
 			handleDisconnect: () => void
@@ -124,6 +125,7 @@ export function makeChatServerCore({
 				rando,
 				persistence,
 				clientRecord,
+				headers,
 				policy,
 			}),
 			disconnect() {

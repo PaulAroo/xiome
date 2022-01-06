@@ -52,6 +52,7 @@ export async function chatValidationTestSetup(
 		rando,
 		persistence,
 		clientRecord,
+		headers: {},
 		policy: mockChatPolicy,
 	})
 

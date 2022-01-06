@@ -11,11 +11,13 @@ export const makeChatServerside = ({
 		rando,
 		clientRecord,
 		persistence,
+		headers,
 		policy,
 	}: {
 		rando: Rando
 		clientRecord: ClientRecord
 		persistence: ChatPersistence
+		headers: renraku.HttpHeaders
 		policy: ChatPolicy
 }) => renraku.api({
 
@@ -45,7 +47,7 @@ export const makeChatServerside = ({
 
 		return {
 			async updateUserMeta(meta: ChatMeta) {
-				clientRecord.auth = await policy(meta)
+				clientRecord.auth = await policy(meta, headers)
 			},
 			async roomSubscribe(room: string) {
 				enforceValidation(validateChatRoom(room))
